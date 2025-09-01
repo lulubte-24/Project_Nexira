@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soutenance — Présentation orale</title>
+  <meta name="description" content="Présentation orale détaillée du projet de stage." />
+  <link rel="stylesheet" href="Style_Presentation.css" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Soutenance — Bonte Lucas</div>
+        <a href="../index.html" class="brand">← Accueil</a>
+        <div class="controls">
+            <button id="prev" title="Précédent">◀</button>
+            <button id="next" title="Suivant">▶</button>
+        </div>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+    </header>
+
+    <main id="deck" class="deck">
+
+        <!-- 1. INTRO Version Ok -->
+        <section class="slide cover" id="intro">
+            <div class="page-cover">
+                <div class="cover-header">
+                    <img src="../assets/Base/Universite_Poitier_Img.png" alt="Université de Poitiers" class="logo left">
+                    <div class="title-block">
+                        <h3>Licence professionnelle</h3>
+                        <p>
+                            Métiers de l’industrie : mécatronique, robotique<br>
+                            <strong style="color:#c00;">Automatisation et Robotique</strong>
+                        </p>
+                    </div>
+                    <img src="../assets/Base/UIMM_Img.jpg" alt="UIMM" class="logo right">
+                </div>
+
+                <div class="cover-body">
+                    <h1>Rapport Projet License</h1>
+                    <h2>Année Universitaire 2024-2025</h2>
+                    <p class="student">Apprenti Automaticien chez Cetec Industrie</p>
+                </div>
+
+                <div class="cover-footer">
+                    <p>Tuteur Entreprise : Christophe Fontanaud</p>
+                    <p>Tuteur Académique : Pierre Laguilhomie</p>
+                    <p>Bonte Lucas</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 2. SOMMAIRE -->
+        <section class="slide" id="sommaire">
+            <h2>Sommaire</h2>
+            <ol class="sommaire-list">
+                <li>Remerciments</li>
+                <li>Entreprise CETEC Industrie</li>
+                <li>Contexte du Projet</li>
+                <li>Client — NEXIRA</li>
+                <li>Cahier des charges</li>
+                <li>Architecture de la solution</li>
+                <li>Programmation Automate</li>
+                <li>Programmation Robot</li>
+                <li>Programmation IHM</li>
+                <li>Tests & FAT</li>
+                <li>Mise en service</li>
+                <li>Communications & Sécurité</li>
+                <li>Résultats</li>
+                <li>Difficultés & Solutions</li>
+                <li>Bilan personnel</li>
+                <li>Perspectives</li>
+            </ol>
+        </section>
+
+        <!-- 3. REMERCIEMENTS -->
+        <section class="slide" id="remerciements">
+            <h2>Remerciements</h2>
+            <p>Je tiens à remercier :</p>
+            <ul class="big">
+                <li>Mon tuteur en entreprise <strong>Christophe Fontanaud</strong></li>
+                <li>Mon tuteur académique <strong>Pierre Laguilhomie</strong></li>
+                <li>L’équipe CETEC Industrie pour son accompagnement</li>
+                <li>Mes enseignants pour leur suivi</li>
+            </ul>
+        </section>
+
+        <!-- 4. ENTREPRISE -->
+        <section class="slide" id="entreprise">
+            <h2>Entreprise d’accueil — CETEC Industrie</h2>
+            <div class="grid-2">
+                <div>
+                    <ul class="check">
+                        <li><strong>Métier :</strong> machines spéciales & lignes d’ensachage/palettisation.</li>
+                        <li><strong>Rôle :</strong> intégrateur clé-en-main (mécanique, élec, automatismes, robotique, IHM).</li>
+                        <li><strong>Atouts :</strong> expérience terrain, atelier d’assemblage, essais FAT client.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="../assets/Cetec/cetec_logo.png" alt="Logo CETEC" class="illus">
+                </div>
+            </div>
+
+            <!-- Organigramme -->
+            <div class="orgchart pro low">
+                <!-- NIVEAU 0 -->
+                <div class="node n0">
+                    <div class="cap"></div>
+                    <h3>Direction Générale</h3>
+                    <p>Vision & stratégie</p>
+                    <p>Régis Labrue</p>
+                </div>
+
+                <!-- BARRE VERS NIVEAU 1 -->
+                <div class="link v"></div>
+
+                <!-- NIVEAU 1 -->
+                <div class="row r1">
+
+                    <!--Bureau D'Etude'-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Bureau d’études Mecanique</h4>
+                        <p>
+                            Jean-Baptiste Duverge
+                        </p>
+                    </div>
+
+                    <!--Bureau elec-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Bureau d’études Electrique</h4>
+                        <p>
+                            Chau Leminh
+                        </p>
+                    </div>
+
+                    <!--Bureau Automatisme-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Automatismes & Robotique</h4>
+                        <p>
+                            Service dont je fais parti
+                        </p>
+                    </div>
+
+                    <!--Bureau Atelier-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Atelier</h4>
+                        <p>
+                            Didier Mallet
+                        </p>
+                    </div>
+
+                    <!--Bureau Commercial-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Commercial</h4>
+                        <p>
+                            Mathias Elie
+                        </p>
+                    </div>
+
+                    <!--Bureau Achats-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Achats</h4>
+                        <p>
+                            Pierre Gauzan
+                        </p>
+                    </div>
+
+                    <!--Bureau Développement informatique-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Développement informatique</h4>
+                        <p>
+                            Boris Richer
+                        </p>
+                    </div>
+
+                    <!--Bureau Fabrication-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Fabrication</h4>
+                        <p>
+                            Sébastien Cumenal
+                        </p>
+                    </div>
+
+                    <!--Bureau Chantiers-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Chantiers</h4>
+                        <p>
+                            Gilles Mallet
+                        </p>
+                    </div>
+
+                    <!--Bureau Administration-->
+                    <div class="node">
+                        <div class="cap"></div>
+                        <h4>Administration</h4>
+                        <p>
+                            Vanessa Souvestre
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTEXTE PROJET -->
+        <section class="slide" id="contexte">
+            <h2>Contexte & objectifs</h2>
+            <blockquote>
+                Remplacer la palettisation manuelle par une cellule robotisée performante.
+            </blockquote>
+            <ul class="big">
+                <li><strong>Objectifs :</strong> augmenter la cadence, garantir la qualité, améliorer la sécurité et la traçabilité.</li>
+                <li><strong>Périmètre :</strong> de l’étude jusqu’à la mise en service (API, robot, IHM, tests, FAT).</li>
+            </ul>
+
+            <figure class="card media">
+                <video class="accel-video"
+                       src="assets/videos/Video_2.MP4"
+                       poster="assets/images/Projet/Machine.jpg"
+                       muted
+                       autoplay
+                       loop
+                       playsinline>
+                </video>
+            </figure>
+        </section>
+
+        <section class="slide" id="contexte">
+            <h2>Contexte</h2>
+            <img src="assets/Machine/Depileur_2.PNG" height="250" />
+            <img src="assets/Machine/ascenseur.PNG" height="250" />
+            <img src="assets/Machine/table.png" height="250" />
+            <img src="assets/Machine/Alim_Sac_1.PNG" height="250" />
+            <img src="assets/Machine/robot.PNG" height="250" />
+        </section>
+
+        <!-- 6. CLIENT NEXIRA -->
+        <section class="slide" id="client">
+            <h2>Client — NEXIRA</h2>
+            <div class="grid-2">
+                <div>
+                    <ul class="big">
+                        <li><strong>Leader :</strong> gomme d’acacia & ingrédients végétaux (site de Serqueux).</li>
+                        <li><strong>Exigences :</strong> qualité palette, répétabilité, suivi production, alarmes.</li>
+                        <li><strong>Contraintes :</strong> intégration dans l’environnement existant, normes HSE.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="../assets/Nexira/nexira_logo.png" alt="Logo Nexira" class="illus">
+                    <figure class="card media">
+                        <div class="img-rotator" data-interval="2500">
+                            <img data-online="https://www.nexira.com/wp-content/uploads/2023/11/acacia-nexira-1.png"
+                                 data-local="assets/images/Client/Ag_Nexira_1.jpg" loading="lazy" class="active ">
+                            <img data-online="https://www.nexira.com/wp-content/uploads/2023/11/innovation-nexira-768x632.png"
+                                 data-local="assets/images/Client/Ag_Nexira_2.jpg" loading="lazy" class="">
+                            <img data-online="https://www.nexira.com/wp-content/uploads/2023/11/groupe-de-masques-52-768x770.png"
+                                 data-local="assets/images/Client/Ag_Nexira_3.jpg" loading="lazy" class="">
+                            <img data-online="https://www.nexira.com/wp-content/uploads/2023/11/organic-ingredients-nexira-768x590.png"
+                                 data-local="assets/images/Client/Ag_Nexira_4.jpg" loading="lazy" class="">
+                        </div>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. CAHIER DES CHARGES -->
+        <section class="slide" id="cdc">
+            <h2>Cahier des charges (extraits)</h2>
+            <div class="callout">
+                <ul class="check">
+                    <li>Formats sacs : 20/25 kg — schémas de palettisation.</li>
+                    <li>Cellule robot : prise/dépose sac.</li>
+                    <li>IHM : choix recettes, alarmes, suivi lot & traçabilité.</li>
+                    <li>Sûreté : périmètre sécurisé, ARU, modes manuel/auto.</li>
+                </ul>
+            </div>
+            <p class="note">⚠ Certaines informations détaillées restent confidentielles.</p>
+        </section>
+
+        <!-- 8. ARCHITECTURE MACHINE -->
+        <section class="slide" id="archi">
+            <h2>Architecture de la solution</h2>
+            <div class="grid-2">
+                <ul class="check">
+                    <li>Convoyeurs entrée/sortie + distributeur de palettes.</li>
+                    <li>Table tournante 0°/90° + table élévatrice.</li>
+                    <li>Ascenseur avec trappes & rives sup./inf.</li>
+                    <li>Distributeur d’intercalaires + pré-banderoleuse.</li>
+                    <li>Contrôles : poids, métal, étiquetage.</li>
+                </ul>
+                <div class="callout">
+                    <h3>Pilotage & communications</h3>
+                    <ul>
+                        <li>Automate Allen-Bradley (Logix) + <strong>MotoLogix</strong> pour le robot Yaskawa.</li>
+                        <li>IHM KEP : vues recettes, états, alarmes.</li>
+                        <li>Comms : TCP/IP (étiqueteuse), Modbus TCP, réseau usine.</li>
+                    </ul>
+                </div>
+                <img src="assets/images/Projet/Machine.jpg" />
+            </div>
+        </section>
+
+        <!-- 9. AUTOMATISME -->
+        <section class="slide" id="autom">
+            <h2>Programmation Automate</h2>
+            <ul class="big">
+                <li>Structure programme Logix, gestion des entrées/sorties et variateurs.</li>
+                <li>Supervision des périphériques (convoyage, rives, ascenseur, intercalaires, banderoleuse).</li>
+                <li>Gestion des états/modes (manuel/auto), temporisations, alarmes.</li>
+            </ul>
+
+        </section>
+
+        <!-- 10. ROBOTIQUE -->
+        <section class="slide" id="robot">
+            <h2>Programmation Robot</h2>
+            <ul class="big">
+                <li>Simulation MotoSim : frames de référence, points de prise/dépose, points de passage.</li>
+                <li>Optimisation trajectoires, zones d’interdiction, gestion collisions.</li>
+                <li>Intégration MotoLogix : contrôle du robot depuis l’API.</li>
+            </ul>
+
+            <img src="assets/images/Projet/Image13.png" class="illus">
+            <img src="assets/images/Projet/Image10.png" class="illus">
+        </section>
+
+        <!-- 11. IHM -->
+        <section class="slide" id="ihm">
+            <h2>Programmation IHM</h2>
+            <div class="grid-2">
+                <ul class="big">
+                    <li>Vues opérateur : recettes, alarmes, états moteurs, consignes.</li>
+                    <li>Pages maintenance : diagnostics, IP & comms, temporisations, modes manuels.</li>
+                    <li>Mise en Fonctionnement Machine.</li>
+                    <li>Design orienté lisibilité & retours opérateurs.</li>
+                    <li>Connexion à distance pour les maintenance</li>
+                    <li>Calcule d'efficience</li>
+                </ul>
+                <div>
+                    <figure class="card media">
+                        <div class="img-rotator" data-interval="5000">
+                            <img src="assets/images/IHM/M_General.jpg" class="active " />
+                            <img src="assets/images/IHM/M_Manue.jpg" />
+                            <img src="assets/images/IHM/Com_Ip.jpg" />
+                            <img src="assets/images/IHM/Frame_Robot.jpg" />
+                            <img src="assets/images/IHM/Pt_Robot.jpg" />
+                        </div>
+                    </figure>
+                </div>
+                <figure class="card media">
+                    <video class="accel-video"
+                           src="assets/videos/Simulation_Rives.mp4"
+                           poster="assets/images/Projet/Machine.jpg"
+                           muted
+                           autoplay
+                           loop
+                           playsinline>
+                    </video>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 12. TESTS & FAT -->
+        <section class="slide" id="tests">
+            <h2>Tests & FAT</h2>
+            <ul class="check">
+                <li>Tests atelier : cycles manuel/auto, périphériques, sécurité.</li>
+                <li>FAT : démonstration cycle complet, corrections et validation client.</li>
+                <li>Métriques suivies : stabilité empilement, cadence, arrêts/causes.</li>
+            </ul>
+        </section>
+
+        <!-- 13. MISE EN SERVICE -->
+        <section class="slide" id="mes">
+            <h2>Mise en service (site)</h2>
+            <ul class="big">
+                <li>Intégration périphériques (étiquetage, contrôle poids/métal, AGV le cas échéant).</li>
+                <li>Ajustements opérations, recettes, trajectoires robot.</li>
+                <li>Formation opérateurs & maintenance.</li>
+                <li>Mise en production + suivie SAV client.</li>
+            </ul>
+
+            <div class="video-row">
+                <video class="vid" src="assets/videos/Video_1.MP4"
+                       poster="assets/images/Projet/Video_1.jpg"
+                       muted autoplay loop playsinline preload="auto"></video>
+
+                <video class="vid" src="assets/videos/Video_2.MP4"
+                       poster="assets/images/Projet/Video_2.jpg"
+                       muted autoplay loop playsinline preload="auto"></video>
+
+                <video class="vid" src="assets/videos/Video_3.MP4"
+                       poster="assets/images/Projet/Video_3.jpg"
+                       muted autoplay loop playsinline preload="auto"></video>
+            </div>
+        </section>
+
+
+        <!-- 15. RÉSULTATS -->
+        <section class="slide" id="resultats">
+            <h2>Résultats</h2>
+            <div class="grid-2">
+                <ul class="check">
+                    <li>Cellule opérationnelle — qualité palette maîtrisée.</li>
+                    <li>Cadence cible atteinte (selon formats).</li>
+                    <li>Alarmes & diagnostics exploitables.</li>
+                </ul>
+                <ul class="check">
+                    <li>Documentation & transfert de compétences.</li>
+                    <li>Retour client positif (améliorations identifiées).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 17. BILAN PERSONNEL -->
+        <section class="slide" id="bilan">
+            <h2>Bilan personnel</h2>
+            <ul>
+                <li>Compétences : AB/MotoLogix, IHM, mise en réseau, méthode.</li>
+                <li>Expérience : FAT & mise en service en conditions réelles.</li>
+                <li>Soft skills : communication client, travail en équipe, rigueur.</li>
+            </ul>
+        </section>
+
+        <!-- 18. PERSPECTIVES -->
+        <section class="slide" id="persp">
+            <h2>Perspectives</h2>
+            <ul>
+                <li>Optimisation cycles (rives, trajectoires).</li>
+                <li>Templates IHM réutilisables & indicateurs OEE.</li>
+                <li>Capitalisation : bibliothèques Motologix & blocs IHM.</li>
+            </ul>
+        </section>
+
+        <!-- 19. DOCUMENTS -->
+        <section class="slide" id="docs">
+            <h2>Documents clés</h2>
+            <ul class="docs">
+                <li><a href="assets/docs/Rapport_License_Bonte_Lucas.pdf" target="_blank" rel="noopener">Rapport/Rapport_License_Bonte_Lucas.pdf</a></li>
+                <li><a href="assets/docs/Prog_Intercal.pdf" target="_blank" rel="noopener">Rapport/Automation/Prog_Intercal.pdf</a></li>
+                <li><a href="assets/docs/Prog_ModBus.pdf" target="_blank" rel="noopener">Rapport/Automation/Prog_ModBus.pdf</a></li>
+                <li><a href="assets/docs/Prog_Mouv_Robot_Yas.pdf" target="_blank" rel="noopener">Rapport/Automation/Prog_Mouv_Robot_Yas.pdf</a></li>
+                <li><a href="assets/docs/Prog_Etiquette.pdf" target="_blank" rel="noopener">Rapport/Automation/Etiquette/Prog_Etiquette.pdf</a></li>
+                <li><a href="assets/docs/Prog_Rives.pdf" target="_blank" rel="noopener">Rapport/Automation/Rives/Prog_Rives.pdf</a></li>
+                <li><a href="assets/docs/Graf_Rives.pdf" target="_blank" rel="noopener">Rapport/Automation/Rives/Grafcet/Graf_Rives.pdf</a></li>
+                <li><a href="assets/docs/Simulation Rives.pdf" target="_blank" rel="noopener">Rapport/Automation/Simulation_Rives/Simulation Rives.pdf</a></li>
+                <li><a href="assets/docs/Cahier_Charges_Nexira.pdf" target="_blank" rel="noopener">Rapport/CDC/Cahier_Charges_Nexira.pdf</a></li>
+                <li><a href="assets/docs/Notice d'utilisation PAPR 24008 NEXIRA.pdf" target="_blank" rel="noopener">Rapport/Notice_Robot/Notice d'utilisation PAPR 24008 NEXIRA.pdf</a></li>
+            </ul>
+        </section>
+
+        <!-- 20. GALERIE -->
+        <section class="slide" id="galerie">
+            <h2>Galerie</h2>
+            <div class="gallery">
+                <figure><img src="assets/images/Projet/Image1.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image10.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image11.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image12.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image13.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image14.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image15.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image16.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image17.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image18.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image19.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image2.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image20.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image21.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image22.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image23.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image24.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image25.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image26.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image27.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image28.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image3.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image4.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image5.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image6.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image7.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image8.png"><figcaption></figcaption></figure>
+                <figure><img src="assets/images/Projet/Image9.png"><figcaption></figcaption></figure>
+            </div>
+            <div class="lightbox" id="lightbox" hidden>
+                <button class="close" aria-label="Fermer">×</button>
+                <img id="lbimg" alt="Agrandissement">
+                <div class="caption" id="lbcap"></div>
+            </div>
+        </section>
+
+        <!-- 21. VIDÉOS -->
+        <section class="slide" id="videos">
+            <h2>Vidéos</h2>
+            <video id="player" class="player" controls preload="metadata" width="50%" playsinline>
+                <source src='assets/videos/Simulation_Rives.mp4'>
+                Votre navigateur ne peut pas lire cette vidéo.
+            </video>
+            <div class="playlist">
+                <button class="vthumb" data-src="assets/videos/Simulation_Rives.mp4" title="Rapport/Video/Simulation_Rives.mp4">Rapport/Video/Simulation_Rives.mp4               </button>
+                <button class="vthumb" data-src="assets/videos/test_Pre_Serrage.MP4" title="Rapport/Video/test_Pre_Serrage.MP4">Rapport/Video/test_Pre_Serrage.MP4               </button>
+                <button class="vthumb" data-src="assets/videos/Trajectoire_Robot_test.mp4" title="Rapport/Video/Trajectoire_Robot_test.mp4">Rapport/Video/Trajectoire_Robot_test.mp4   </button>
+                <button class="vthumb" data-src="assets/videos/Video_1.MP4" title="Rapport/Video/Video_1.MP4">Rapport/Video/Video_1.MP4                                 </button>
+                <button class="vthumb" data-src="assets/videos/Video_2.MP4" title="Rapport/Video/Video_2.MP4">Rapport/Video/Video_2.MP4                                 </button>
+                <button class="vthumb" data-src="assets/videos/Video_3.MP4" title="Rapport/Video/Video_3.MP4">Rapport/Video/Video_3.MP4                                 </button>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="bottombar">
+        <div>Astuce : flèches <kbd>←</kbd>/<kbd>→</kbd> pour naviguer — Imprimer en PDF depuis le navigateur.</div>
+    </footer>
+
+    <script>
+        (function () {
+            function initDeck() {
+                const slides = Array.from(document.querySelectorAll('.slide'));
+                let idx = 0;
+                const prev = document.getElementById('prev');
+                const next = document.getElementById('next');
+                const bar = document.getElementById('bar');
+
+                function show(i) {
+                    idx = (i + slides.length) % slides.length;
+                    slides.forEach((s, k) => s.classList.toggle('current', k === idx));
+                    if (bar) { bar.style.width = (((idx + 1) / slides.length) * 100) + '%'; }
+                    try { history.replaceState(null, '', '#' + (idx + 1)); } catch (_) { }
+                }
+                function step(d) { show(idx + d); }
+
+                if (prev) prev.addEventListener('click', (e) => { e.preventDefault(); step(-1); });
+                if (next) next.addEventListener('click', (e) => { e.preventDefault(); step(1); });
+
+                document.addEventListener('keydown', (e) => {
+                    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) step(1);
+                    if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) step(-1);
+                });
+
+                const m = location.hash && location.hash.match(/#(\d+)/);
+                show(m ? (parseInt(m[1], 10) - 1) : 0);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initDeck);
+            } else {
+                initDeck();
+            }
+        })();
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".img-rotator").forEach(rotator => {
+                const images = Array.from(rotator.querySelectorAll("img"));
+                if (!images.length) return;
+
+                // Donne un src aux images à partir de data-local puis data-online
+                const ensureSrc = img => {
+                    if (!img.getAttribute("src")) {
+                        const local = img.getAttribute("data-local");
+                        const online = img.getAttribute("data-online");
+                        img.src = local || online || "";  // local prioritaire, sinon online
+                    }
+                };
+
+                // Initialisation : charge au moins l'image active (ou la 1ʳᵉ)
+                let current = images.findIndex(i => i.classList.contains("active"));
+                if (current < 0) current = 0;
+                ensureSrc(images[current]);
+
+                // Préchargement paresseux : charge l'image suivante juste avant affichage
+                const interval = parseInt(rotator.dataset.interval, 10) || 3000;
+                setInterval(() => {
+                    images[current].classList.remove("active");
+                    current = (current + 1) % images.length;
+                    ensureSrc(images[current]);
+                    images[current].classList.add("active");
+                }, interval);
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".accel-video").forEach((vid) => {
+                // Params d'accélération
+                const START = parseFloat(vid.dataset.speedStart || "1.0");
+                const STEP = parseFloat(vid.dataset.speedStep || "0.25");
+                const MAX = parseFloat(vid.dataset.speedMax || "2.5");
+
+                vid.playbackRate = START;
+
+                // Crée (ou récupère) le badge de vitesse
+                let badge = vid.closest(".card.media").querySelector(".speed-indicator");
+                if (!badge) {
+                    badge = document.createElement("div");
+                    badge.className = "speed-indicator";
+                    badge.textContent = `×${vid.playbackRate.toFixed(2)}`;
+                    vid.closest(".card.media").appendChild(badge);
+                }
+
+                // Affiche brièvement le badge
+                const flashBadge = () => {
+                    badge.textContent = `×${vid.playbackRate.toFixed(2)}`;
+                    badge.classList.add("show");
+                    clearTimeout(badge._t);
+                    badge._t = setTimeout(() => badge.classList.remove("show"), 900);
+                };
+
+                // Petit "pulse" visuel sur la vidéo
+                const pulseVideo = () => {
+                    vid.classList.add("bump");
+                    clearTimeout(vid._p);
+                    vid._p = setTimeout(() => vid.classList.remove("bump"), 480);
+                };
+
+                // Détection de boucle (le temps recule car loop)
+                let prevTime = 0;
+                vid.addEventListener("timeupdate", () => {
+                    const t = vid.currentTime || 0;
+                    if (t < prevTime) {
+                        // On vient de boucler -> accélère jusqu'au MAX
+                        const next = Math.min(MAX, (vid.playbackRate || START) + STEP);
+                        if (next !== vid.playbackRate) {
+                            vid.playbackRate = next;
+                            pulseVideo();
+                            flashBadge();
+                        }
+                    }
+                    prevTime = t;
+                });
+
+                // Sécurité autoplay (certains navigateurs peuvent mettre pause)
+                vid.addEventListener("pause", () => {
+                    if (vid.muted) vid.play().catch(() => { });
+                }, { passive: true });
+
+                // Démarre avec un petit flash au chargement
+                flashBadge();
+                pulseVideo();
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1225 @@
+@page { size: A4 landscape; margin: 8mm; }
+
+/* ====== Style_Presentation.css — Soutenance ====== */
+:root{
+  --bg:#0b0c10; --fg:#f5f7fb; --muted:#b7bfd4;
+  --brand:#4f7cff; --accent:#00c2a8; --card:#12141b; --panel:#0f1117;
+  --radius:16px; --shadow:0 18px 50px rgba(0,0,0,.35);
+}
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+  color: var(--fg);
+  background: radial-gradient(ellipse at bottom, #0b0c10 0%, #000 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* top bar */
+.topbar{ position:fixed; inset:0 0 auto 0; height:60px; display:flex; align-items:center; gap:16px;
+  padding:0 12px; background:rgba(15,17,23,.7); backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.06); z-index:10; }
+.brand{ font-weight:800; letter-spacing:.2px; white-space:nowrap; }
+.toc{ display:none; gap:10px; margin-left:10px; flex-wrap:wrap; }
+.toc a{ color:#cfe1ff; text-decoration:none; font-size:.92rem; opacity:.9; }
+.toc a:hover{ text-decoration:underline; }
+@media(min-width:1100px){ .toc{ display:flex; } }
+
+.controls{ margin-left:auto; display:flex; gap:8px; }
+.controls button{ appearance:none; border:1px solid rgba(255,255,255,.2); background:transparent; color:var(--fg);
+  padding:6px 10px; border-radius:10px; cursor:pointer; }
+.controls button:hover{ border-color:rgba(255,255,255,.4); transform:translateY(-1px); }
+.progress{ position:absolute; left:0; right:0; bottom:0; height:3px; background:rgba(255,255,255,.08); }
+.progress .bar{ height:100%; width:0%; background:linear-gradient(90deg, var(--brand), var(--accent)); transition:width .25s; }
+
+/* deck */
+.deck{ height:100vh; padding-top:60px; }
+.slide{ display:none; height:calc(100vh - 60px); padding:46px 7vw; position:relative; }
+.slide.current{ display:block; }
+.slide h1, .slide h2{ margin:0 0 16px; line-height:1.15; }
+.slide h1{ font-size: clamp(2rem, 5.2vw, 4.2rem); }
+.subtitle, .meta{ color:var(--muted); }
+.tags{ list-style:none; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; padding:0; margin:14px 0 0; }
+.tags li{ border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.06); border-radius:999px; padding:6px 12px; }
+.big{ font-size:1.12rem; }
+
+.grid-2{ display:grid; gap:22px; grid-template-columns: 1.2fr 1fr; }
+.grid-3{ display:grid; gap:18px; grid-template-columns: repeat(3, 1fr); }
+@media(max-width:900px){ .grid-2{ grid-template-columns: 1fr; } .grid-3{ grid-template-columns: 1fr; } }
+
+.callout{ border:1px solid rgba(255,255,255,.16); border-radius:var(--radius);
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); padding:14px; box-shadow:var(--shadow); }
+
+/* table */
+table.timeline{ width:100%; border-collapse:collapse; background:var(--panel);
+  border:1px solid rgba(255,255,255,.08); border-radius:12px; overflow:hidden; }
+.timeline th, .timeline td{ padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.06); }
+.timeline thead{ background:rgba(255,255,255,.06); }
+.timeline tr:last-child td{ border-bottom:0; }
+.timeline td:nth-child(2){ color:var(--muted); }
+
+/* gallery */
+.gallery{ display:grid; gap:12px; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); }
+.gallery figure{ margin:0; border:1px solid rgba(255,255,255,.12); border-radius:12px; overflow:hidden; background:#111; }
+.gallery img{ width:100%; height:180px; object-fit:cover; display:block; cursor:zoom-in; }
+.gallery figcaption{ padding:8px 10px; font-size:.9rem; color:#bfc6d5; }
+
+/* lightbox */
+.lightbox{ position:fixed; inset:0; background:rgba(0,0,0,.72); display:flex; align-items:center; justify-content:center; z-index:999; }
+.lightbox[hidden]{ display:none; }
+.lightbox img{ max-width:92vw; max-height:82vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.6); }
+.lightbox .close{ position:absolute; top:18px; right:18px; font-size:28px; border:none; background:rgba(255,255,255,.15); color:#fff; width:42px; height:42px; border-radius:50%; cursor:pointer; }
+.lightbox .caption{ position:absolute; left:0; right:0; bottom:18px; text-align:center; color:#fff; font-size:1rem; text-shadow:0 2px 8px rgba(0,0,0,.8); }
+
+/* video player */
+.player{ border:1px solid rgba(255,255,255,.15); border-radius:12px; background:#000; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+.playlist{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+.playlist .vthumb{ border:1px solid rgba(255,255,255,.2); background:transparent; color:#fff; padding:6px 10px; border-radius:10px; cursor:pointer; }
+.playlist .vthumb:hover{ border-color:rgba(255,255,255,.45); transform:translateY(-1px); }
+
+/* footer */
+.bottombar{ position:fixed; inset:auto 0 0 0; height:40px; display:flex; align-items:center; justify-content:center;
+  color:var(--muted); background:rgba(15,17,23,.75); border-top:1px solid rgba(255,255,255,.06); }
+
+/* Logo CETEC affiché sur toutes les diapositives */
+.slide::after {
+    content: "";
+    position: fixed;
+    bottom: -10mm;
+    right: 0mm;
+    width: 120px;
+    height: 150px;
+    background: url("../assets/Cetec/cetec_logo.png") no-repeat center/contain;
+    opacity: 0.8;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* print */
+@media print {
+    /* Page en paysage + marges réduites */
+    @page {
+        size: A4 landscape;
+        margin: 8mm;
+    }
+    /* Forcer chaque slide comme référence pour le logo */
+    .slide {
+        position: relative !important;
+    }
+    /* Stopper les animations/transitions pour éviter le texte manquant */
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+    #sommaire, #sommaire .sommaire-list li {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+        animation: none !important;
+    }
+    /* Mise à plat pour l'impression */
+    html, body {
+        width: 100%;
+        height: auto;
+        overflow: visible !important;
+    }
+    /* Masquer les éléments d'UI */
+    .topbar, .bottombar, #pdf-controls {
+        display: none !important;
+    }
+    /* Masquer les sections non désirées */
+    #docs, #galerie, #videos {
+        display: none !important;
+    }
+    .deck {
+        padding-top: 0 !important;
+    }
+    .slide {
+        display: block !important;
+        width: 100%;
+        max-width: none;
+        height: auto !important;
+        overflow: visible !important;
+        page-break-after: always;
+        padding: 8mm 10mm;
+        border: none;
+        box-shadow: none;
+        /* garder le fond étoilé → pas de background forcé blanc */
+    }
+        /* Forcer l'affichage des items de listes animées */
+        .slide ul li,
+        .slide .big > li,
+        .slide .check > li {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+        }
+    /* Éviter les coupures gênantes */
+    .grid-2, .grid-3, .callout, figure, img, table, blockquote, ul {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+
+
+/* Page de garde : logos gauche/droite + titre centré */
+.cover-header {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.cover-header .logo {
+  max-height: 70px;
+  width: auto;
+  object-fit: contain;
+}
+.cover-header .logo.left { justify-self: start; }
+.cover-header .logo.right { justify-self: end; }
+.cover-header .title-block { text-align: center; }
+
+/* === Page de garde : logos gauche/droite + titre centré === */
+.cover-header{
+  display:grid;
+  grid-template-columns: 120px 1fr 120px;
+  align-items:center;
+  margin-bottom:24px;
+  column-gap: 16px;
+}
+.cover-header .logo{
+  max-height:280px;
+  width:auto;
+  object-fit:contain;
+}
+.cover-header .logo.left{ justify-self:start; }
+.cover-header .logo.right{ justify-self:end; }
+.cover-header .title-block{ text-align:center; }
+
+/* === Fond étoilé bien visible === */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-2; pointer-events:none;
+  /* Nuage d'étoiles (beaucoup de points blancs) */
+  background-image:
+    radial-gradient(2.5px 2.5px at 10% 20%, white, transparent 40%),
+    radial-gradient(3px 3px at 30% 70%, white, transparent 40%),
+    radial-gradient(2.5px 2.5px at 60% 40%, white, transparent 40%),
+    radial-gradient(2px 2px at 80% 80%, white, transparent 40%),
+    radial-gradient(3px 3px at 50% 50%, white, transparent 40%),
+    radial-gradient(2px 2px at 15% 85%, white, transparent 40%),
+    radial-gradient(2.5px 2.5px at 75% 25%, white, transparent 40%);
+  background-size: 240px 240px, 280px 280px, 340px 340px, 420px 420px, 520px 520px, 600px 600px, 700px 700px;
+  background-repeat: repeat;
+  opacity: 0.9;
+}
+body::after{
+  content:"";
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  /* Étoiles "brillantes" qui scintillent */
+  background-image:
+    radial-gradient(5px 5px at 20% 30%, white, transparent 50%),
+    radial-gradient(4px 4px at 70% 60%, #e6e6e6, transparent 50%),
+    radial-gradient(3px 3px at 40% 80%, #fafafa, transparent 50%);
+  background-size: 320px 320px, 440px 440px, 600px 600px;
+  background-repeat: repeat;
+  animation: twinkle 6s ease-in-out infinite;
+  opacity: 0.85;
+}
+@keyframes twinkle{
+  0%,100%{ opacity:.85; }
+  50%{ opacity:.35; }
+}
+@media print{
+/* Landscape print tuning */
+html, body { width: 100%; height: auto; overflow: visible !important; }
+.topbar, .bottombar, #pdf-controls { display:none !important; }
+.deck{ padding-top:0; }
+.slide{
+  display:block !important;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  page-break-after: always;
+  padding: 8mm 10mm;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+/* Avoid awkward breaks inside grids/images */
+.grid-2, .callout, figure, img { break-inside: avoid; }
+
+  body::before, body::after{ display:none !important; content:none !important; 
+}
+}
+
+/* center h1/h2 on cover explicitly */
+.slide.cover .cover-body h1,
+.slide.cover .cover-body h2,
+.slide.cover .cover-body p { text-align:center; margin-left:auto; margin-right:auto; }
+
+
+/* tutor lines style */
+.slide.cover .cover-footer p{ margin: 2px 0; }
+.slide.cover .cover-footer strong{ font-weight:1000; }
+
+
+/* cover-footer inline variant (one single centered line) */
+.slide.cover .cover-footer.inline{ bottom: 20px; }
+.slide.cover .cover-footer.inline p{
+  display: inline; margin: 0 6px; white-space: nowrap;
+}
+.slide.cover .cover-footer.inline p + p::before{
+  content: " • ";
+  margin: 0 6px;
+  color: rgba(255,255,255,.6);
+}
+
+/* === Animations pour la présentation orale === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide h2 {
+    animation: fadeInUp 0.8s ease both;
+}
+
+.slide ul li {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.slide ul li:nth-child(1) {
+        animation-delay: .2s;
+    }
+
+.slide ul li:nth-child(2) {
+        animation-delay: .4s;
+    }
+
+.slide ul li:nth-child(3) {
+        animation-delay: .6s;
+    }
+
+.slide ul li:nth-child(4) {
+        animation-delay: .8s;
+    }
+
+.slide ul li:nth-child(5) {
+        animation-delay: 10s;
+    }
+
+/* === Animations images === */
+@keyframes zoomInImg {
+    from {
+        opacity: 0;
+        transform: scale(.9)
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+@keyframes floatImg {
+    0%,100% {
+        transform: translateY(30)
+    }
+
+    50% {
+        transform: translateY(-30px)
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-32px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(32px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+/* Déclenchement uniquement pour la diapo visible */
+.slide.current .logo,
+.slide.current img.illus,
+.slide.current .gallery img {
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: zoomInImg .8s ease forwards .15s, floatImg 5s ease-in-out infinite .95s;
+}
+
+/* Alternance gauche/droite pour plus de vie dans les grilles */
+.slide.current .grid-2 > :first-child img,
+.slide.current .grid-3 > :nth-child(1) img {
+    animation-name: fadeInLeft, floatImg;
+}
+
+.slide.current .grid-2 > :last-child img,
+.slide.current .grid-3 > :nth-child(3) img {
+    animation-name: fadeInRight, floatImg;
+}
+
+/* Effet au survol (desktop) : léger halo + micro-zoom */
+@media (hover:hover) {
+    .slide .logo:hover,
+    .slide img.illus:hover,
+    .slide .gallery img:hover {
+        filter: drop-shadow(0 0 10px var(--accent));
+        transform: scale(1.04);
+        transition: transform .25s ease, filter .25s ease;
+    }
+}
+
+/* Accessibilité & impression : animations coupées, images visibles */
+@media (prefers-reduced-motion: reduce) {
+    .slide .logo,
+    .slide img.illus,
+    .slide .gallery img {
+        animation: none !important;
+    }
+}
+
+@media print {
+    .slide .logo,
+    .slide img.illus,
+    .slide .gallery img {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+
+/* ============ Orgchart PRO (glass + gradient cap) ============ */
+.orgchart.pro {
+    --line: rgba(255,255,255,.18);
+    --cap1: var(--brand);
+    --cap2: var(--accent);
+    --card: rgba(255,255,255,.06);
+    --card2: rgba(255,255,255,.02);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+    margin-inline: auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+    .orgchart.pro.low {
+        margin-top: 6vh;
+    }
+    /* ↓ place l’organigramme plus bas */
+
+    /* Nœuds (cartes) */
+    .orgchart.pro .node {
+        position: relative;
+        border: 1px solid rgba(255,255,255,.16);
+        background: linear-gradient(180deg, var(--card), var(--card2));
+        border-radius: 16px;
+        padding: 18px 16px 14px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(6px) saturate(125%);
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+        .orgchart.pro .node:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,.28);
+            box-shadow: 0 22px 60px rgba(0,0,0,.45);
+        }
+
+        /* Cap dégradé (barre haute) */
+        .orgchart.pro .node .cap {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 7px;
+            border-radius: 16px 16px 0 0;
+            background: linear-gradient(90deg, var(--cap1), var(--cap2));
+            box-shadow: 0 1px 0 rgba(255,255,255,.2) inset;
+        }
+
+    /* Badges ronds (sous-équipes) */
+    .orgchart.pro .badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,.55));
+        color: #0b0c10;
+        font-weight: 800;
+        letter-spacing: .5px;
+        border: 1px solid rgba(255,255,255,.65);
+        box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+
+    /* Typo */
+    .orgchart.pro .n0 h3 {
+        margin: 8px 0 4px;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    .orgchart.pro .n0 p {
+        margin: 0;
+        color: var(--muted);
+    }
+
+    .orgchart.pro h4 {
+        margin: 6px 0 2px;
+        font-size: 1.08rem;
+        font-weight: 750;
+    }
+
+    .orgchart.pro h5 {
+        margin: 14px 0 2px;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .orgchart.pro p {
+        margin: 0;
+        color: var(--muted);
+        font-size: .92rem;
+    }
+
+    /* Lignes / connecteurs */
+    .orgchart.pro .link.v {
+        height: 18px;
+        width: 2px;
+        margin: 0 auto;
+        background: var(--line);
+    }
+
+    .orgchart.pro .row {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(5, minmax(160px,1fr));
+        position: relative;
+        align-items: stretch;
+    }
+
+        .orgchart.pro .row.r1::before,
+        .orgchart.pro .row.r2::before {
+            content: "";
+            position: absolute;
+            left: 6%;
+            right: 6%;
+            top: -12px;
+            height: 2px;
+            background: var(--line);
+        }
+
+        .orgchart.pro .row > .node::before {
+            content: "";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 12px;
+            background: var(--line);
+        }
+
+    .orgchart.pro .link.h.r1 {
+        height: 14px;
+    }
+
+    /* Variantes petites cartes (niveau 2) */
+    .orgchart.pro .node.sm {
+        padding-top: 30px;
+    }
+
+/* Responsive */
+@media(max-width:1100px) {
+    .orgchart.pro .row {
+        grid-template-columns: repeat(3, minmax(180px,1fr));
+    }
+}
+
+@media(max-width:760px) {
+    .orgchart.pro .row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width:520px) {
+    .orgchart.pro .row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+@keyframes glowCap {
+    0%,100% {
+        filter: brightness(1)
+    }
+
+    50% {
+        filter: brightness(1.35)
+    }
+}
+
+.slide.current #entreprise .node {
+    opacity: 0;
+    animation: fadeUp .6s ease forwards;
+}
+
+.slide.current #entreprise .n0 {
+    animation-delay: .05s;
+}
+
+.slide.current #entreprise .r1 > .node:nth-child(1) {
+    animation-delay: .10s;
+}
+
+.slide.current #entreprise .r1 > .node:nth-child(2) {
+    animation-delay: .18s;
+}
+
+.slide.current #entreprise .r1 > .node:nth-child(3) {
+    animation-delay: .26s;
+}
+
+.slide.current #entreprise .r1 > .node:nth-child(4) {
+    animation-delay: .34s;
+}
+
+.slide.current #entreprise .r1 > .node:nth-child(5) {
+    animation-delay: .42s;
+}
+
+.slide.current #entreprise .r2 > .node:nth-child(1) {
+    animation-delay: .18s;
+}
+
+.slide.current #entreprise .r2 > .node:nth-child(2) {
+    animation-delay: .24s;
+}
+
+.slide.current #entreprise .r2 > .node:nth-child(3) {
+    animation-delay: .30s;
+}
+
+.slide.current #entreprise .r2 > .node:nth-child(4) {
+    animation-delay: .36s;
+}
+
+.slide.current #entreprise .r2 > .node:nth-child(5) {
+    animation-delay: .42s;
+}
+
+.slide.current #entreprise .node .cap {
+    animation: glowCap 3.8s ease-in-out infinite;
+}
+
+/* Impression : pas d’anim, pas de coupures */
+@media print {
+    #entreprise .orgchart.pro,
+    #entreprise .orgchart.pro .row,
+    #entreprise .orgchart.pro .node {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    #entreprise .node, #entreprise .cap, #entreprise .badge {
+        animation: none !important;
+    }
+}
+
+/*Animation organigrame*/
+/* === Fondu d'apparition pour l'organigramme (#entreprise) === */
+@keyframes oc-fade {
+  from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
+  to   { opacity: 1; transform: none;             filter: blur(0); }
+}
+
+/* Le conteneur général fond d’abord (léger décalage) */
+.slide.current#entreprise .orgchart.pro {
+  opacity: 0;
+  animation: oc-fade .55s ease forwards .05s !important;
+}
+
+/* Toutes les cartes (.node) fondent ensuite */
+.slide.current#entreprise .orgchart.pro .node {
+  opacity: 0;
+  will-change: opacity, transform, filter;
+  animation: oc-fade .6s ease forwards !important;
+}
+
+/* Stagger — Direction (n0) puis les 10 départements de ta rangée r1 */
+.slide.current#entreprise .orgchart.pro .n0 { animation-delay: .10s !important; }
+
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(1)  { animation-delay: .28s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(2)  { animation-delay: .34s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(3)  { animation-delay: .40s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(4)  { animation-delay: .56s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(5)  { animation-delay: .62s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(6)  { animation-delay: .78s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(7)  { animation-delay: .84s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(8)  { animation-delay: .90s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(9)  { animation-delay: .96s !important; }
+.slide.current#entreprise .orgchart.pro .r1 > .node:nth-of-type(10) { animation-delay: .99s !important; }
+
+/* Les traits de liaison fondent aussi */
+.slide.current#entreprise .orgchart.pro .link,
+.slide.current#entreprise .orgchart.pro .row::before,
+.slide.current#entreprise .orgchart.pro .row > .node::before {
+  opacity: 0;
+  animation: oc-fade .45s ease forwards .16s !important;
+}
+
+/* Impression & accessibilité : animations coupées, tout visible */
+@media (prefers-reduced-motion: reduce){
+  #entreprise .orgchart.pro, #entreprise .orgchart.pro * { animation: none !important; }
+}
+@media print{
+  #entreprise .orgchart.pro, #entreprise .orgchart.pro * {
+    animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important;
+  }
+}
+
+/* ==== Sommaire centré + apparition en fondu ==== */
+
+/* La slide #sommaire devient un conteneur flex quand elle est active */
+.slide.current#sommaire {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* aligne en haut */
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding-top: 60px; /* ajuste la marge haute */
+}
+
+/* Titre */
+#sommaire h2{
+  margin: 0 -250px 0px;
+}
+
+/* Liste : centrée dans la slide, largeur lisible */
+#sommaire .sommaire-list{
+  margin: 0;
+  padding: 0;
+  list-style: decimal;           /* garde la numérotation */
+  width: min(720px, 90%);        /* colonne élégante au centre */
+  text-align: left;              /* lisibilité : texte aligné à gauche */
+}
+/* Taille de base plus grande pour tout le texte des slides */
+.slide {
+  font-size: 1.50rem;
+}
+/* Items : petite animation d’arrivée (utilise ton @keyframes fadeInUp existant) */
+.slide.current#sommaire .sommaire-list li{
+  opacity: 0;
+  transform: translateY(-150px);
+  animation: fadeInUp .45s ease forwards;
+}
+
+/* Stagger (décalage progressif) */
+.slide.current#sommaire .sommaire-list li:nth-child(1)  { animation-delay: .05s; }
+.slide.current#sommaire .sommaire-list li:nth-child(2)  { animation-delay: .10s; }
+.slide.current#sommaire .sommaire-list li:nth-child(3)  { animation-delay: .15s; }
+.slide.current#sommaire .sommaire-list li:nth-child(4)  { animation-delay: .20s; }
+.slide.current#sommaire .sommaire-list li:nth-child(5)  { animation-delay: .25s !important; } /* neutralise la règle 10s */
+.slide.current#sommaire .sommaire-list li:nth-child(6)  { animation-delay: .30s; }
+.slide.current#sommaire .sommaire-list li:nth-child(7)  { animation-delay: .35s; }
+.slide.current#sommaire .sommaire-list li:nth-child(8)  { animation-delay: .40s; }
+.slide.current#sommaire .sommaire-list li:nth-child(9)  { animation-delay: .45s; }
+.slide.current#sommaire .sommaire-list li:nth-child(10) { animation-delay: .50s; }
+.slide.current#sommaire .sommaire-list li:nth-child(11) { animation-delay: .55s; }
+.slide.current#sommaire .sommaire-list li:nth-child(12) { animation-delay: .60s; }
+.slide.current#sommaire .sommaire-list li:nth-child(13) { animation-delay: .65s; }
+.slide.current#sommaire .sommaire-list li:nth-child(14) { animation-delay: .70s; }
+.slide.current#sommaire .sommaire-list li:nth-child(15) { animation-delay: .75s; }
+.slide.current#sommaire .sommaire-list li:nth-child(16) { animation-delay: .80s; }
+.slide.current#sommaire .sommaire-list li:nth-child(17) { animation-delay: .85s; }
+.slide.current#sommaire .sommaire-list li:nth-child(18) { animation-delay: .90s; }
+/* (les suivants héritent, ajoute d’autres lignes si tu veux prolonger le stagger) */
+
+
+/* Cadre pour la page HTML incluse */
+.frame-wrap {
+  width: 100%;
+  height: 70vh;              /* hauteur ajustable */
+  margin-top: 20px;
+  border: 2px solid rgba(255,255,255,.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.frame-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.centered-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* === Sommaire en deux colonnes === */
+#sommaire {
+  display: none; 
+}
+
+.slide.current#sommaire {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center;
+  text-align: center;
+  min-height: 100%;
+  padding-top: 80px;
+}
+
+.slide.current#sommaire h2 {
+  font-size: 2.6rem;
+  margin: 0 0 24px 0;
+}
+
+.slide.current#sommaire .sommaire-list {
+  margin: 0;
+  padding: 0;
+  list-style: decimal inside;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  column-count: 2;
+  column-gap: 60px;
+  text-align: left;
+  width: 80%;
+  max-width: 1000px;
+}
+
+/* Impression : même placement */
+@media print{
+  #sommaire{
+    justify-content: flex-start !important;
+    padding-top: 80px !important;  /* garde le même décalage en PDF */
+  }
+}
+@media print {
+  /* Forcer la mise en page propre du sommaire */
+  #sommaire {
+    display: block !important;      /* pas de flex qui casse en PDF */
+    text-align: center !important;
+    padding-top: 40px !important;   /* espace haut pour le titre */
+    page-break-after: always;       /* chaque slide = une page */
+  }
+
+  #sommaire h2 {
+    font-size: 2.4rem !important;
+    margin: 0 0 20px 0 !important;
+    text-align: center !important;
+  }
+
+  #sommaire .sommaire-list {
+    font-size: 1.5rem !important;
+    line-height: 1.6 !important;
+    margin: 0 auto !important;
+    width: 85% !important;
+    column-count: 2 !important;   /* deux colonnes */
+    column-gap: 50px !important;  /* espace entre colonnes */
+    text-align: left !important;  /* lisibilité */
+  }
+
+  #sommaire .sommaire-list li {
+    margin-bottom: 6px !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    animation: none !important;
+  }
+}
+
+/* Carte du rotateur (optionnel si tu l'as déjà) */
+.card.media {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 16px;
+    padding: 12px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(0,0,0,.5);
+}
+
+/* Rotateur */
+.img-rotator {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 4 / 3; /* ratio stable */
+    min-height: 360px; /* fallback si aspect-ratio non supporté */
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #111;
+}
+
+    .img-rotator img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transform: scale(1.05);
+        transition: opacity 1s ease, transform 2.5s ease;
+        border-radius: 12px;
+    }
+
+        .img-rotator img.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+
+/* Impression : figer l’image visible */
+@media print {
+    .img-rotator img {
+        opacity: 0 !important;
+        transform: none !important;
+    }
+
+        .img-rotator img.active {
+            opacity: 1 !important;
+        }
+}
+
+/* ===== Effets vidéo accélérée ===== */
+.card.media {
+    position: relative;
+}
+/* pour positionner le badge */
+
+.accel-video {
+    display: block;
+    width: min(900px, 100%);
+    aspect-ratio: 16/9;
+    height: auto;
+    max-height: 70vh;
+    margin: 0 auto;
+    border-radius: 12px;
+    background: #000;
+    outline: none;
+    transition: filter .4s ease, opacity .4s ease;
+}
+
+/* Petit "pulse" au moment où la vitesse change */
+@keyframes videoPulse {
+    0% {
+        opacity: .85;
+        filter: brightness(.9) blur(.2px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: none;
+    }
+}
+
+.accel-video.bump {
+    animation: videoPulse 450ms ease;
+}
+
+/* Badge vitesse (×1.25, ×1.5…) */
+.speed-indicator {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: .95rem;
+    background: rgba(0,0,0,.55);
+    border: 1px solid rgba(255,255,255,.25);
+    color: #fff;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .25s ease, transform .25s ease;
+    pointer-events: none;
+    user-select: none;
+    backdrop-filter: blur(4px) saturate(120%);
+}
+
+    .speed-indicator.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* Impression : pas d’effet ni de badge, on garde le poster */
+@media print {
+    .accel-video {
+        display: none !important;
+    }
+
+    .speed-indicator {
+        display: none !important;
+    }
+
+    .card.media::after {
+        content: "";
+        display: block;
+        width: min(900px, 100%);
+        aspect-ratio: 16/9;
+        margin: 0 auto;
+        border-radius: 12px;
+        background: #000 url("assets/images/Projet/Machine.jpg") center/cover no-repeat;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* === Slide #robot : images plus basses et bien alignées === */
+#robot .illus {
+    display: inline-block; /* deux images côte à côte */
+    max-width: 46%; /* ajuste la largeur de chaque image */
+    height: auto;
+    vertical-align: top;
+    margin: 60px 1.5% 0; /* ← descend les images : augmente/réduis 60px */
+    border-radius: 10px; /* optionnel : coins doux */
+    box-shadow: 0 10px 26px rgba(0,0,0,.35);
+}
+
+/* Petits écrans : les images passent l’une sous l’autre, centrées */
+@media (max-width: 900px) {
+    #robot .illus {
+        display: block;
+        max-width: 90%;
+        margin: 40px auto 0; /* descend + centre */
+    }
+}
+
+/* Impression : conserver l’espacement vers le bas */
+@media print {
+    #robot .illus {
+        margin-top: 16mm !important; /* espace stable en PDF */
+        box-shadow: none; /* rendu propre à l’impression */
+    }
+}
+
+/* === Slide #ihm : agrandir les images du rotateur === */
+
+/* Donne un peu plus de place à la colonne de droite (carrousel) */
+#ihm .grid-2 {
+    grid-template-columns: 1fr 1.35fr; /* élargit la zone images */
+}
+
+/* Carte/contour du carrousel */
+#ihm .card.media {
+    padding: 14px;
+    border-radius: 16px;
+}
+
+/* Le rotateur occupe toute la largeur de sa colonne et gagne en hauteur */
+#ihm .img-rotator {
+    width: 100%;
+    max-width: 980px; /* autorise plus large si l’espace le permet */
+    aspect-ratio: 16 / 9; /* plus haut; mets 4/3 si tes captures sont 4:3 */
+    min-height: 420px; /* fallback si aspect-ratio non supporté */
+    margin: 0 auto;
+    border-radius: 14px;
+}
+
+    /* Images du rotateur : affichage net de captures d’écran */
+    #ihm .img-rotator img {
+        object-fit: contain; /* évite de rogner les écrans IHM */
+        background: #0b0c10; /* bande noire autour si besoin */
+        padding: 6px; /* un petit respir */
+        border-radius: 12px;
+    }
+
+/* Petits écrans : repasse en pleine largeur et bonne hauteur */
+@media (max-width: 900px) {
+    #ihm .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    #ihm .img-rotator {
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        min-height: 360px;
+    }
+}
+
+/* Impression : garder une taille lisible et éviter les coupures */
+@media print {
+    #ihm .img-rotator {
+        max-width: 100% !important;
+        min-height: 90mm !important; /* augmente si tu veux plus grand en PDF */
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+        #ihm .img-rotator img {
+            padding: 0 !important; /* bord franc en impression */
+            background: transparent !important;
+        }
+}
+
+/* === Slide #mes : grille de vidéos côte à côte === */
+
+#mes .video-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* largeur min plus grande */
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#mes .vid {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 320px; /* plus de hauteur */
+    background: #000;
+    border-radius: 14px;
+    border: 2px solid rgba(255,255,255,.2);
+    box-shadow: 0 12px 30px rgba(0,0,0,.4);
+    outline: none;
+}
+
+/* Sur petits écrans, une colonne pleine largeur */
+@media (max-width: 900px) {
+    #mes .video-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Impression : pas de vidéo animée, on imprime le poster proprement */
+@media print {
+    #mes .vid {
+        display: none !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    /* Remplacement par les posters (si tu veux une image fixe imprimable) */
+    #mes .video-row {
+        display: grid !important;
+    }
+}
+/* === Slide #ihm — agrandir rotateur + vidéo === */
+
+/* Donne un peu plus de place visuelle à la colonne de droite (rotateur) */
+#ihm .grid-2 {
+    grid-template-columns: 1fr 1.35fr; /* élargit la zone images */
+    gap: 18px;
+}
+
+/* ROTATEUR D'IMAGES PLUS GRAND */
+#ihm .img-rotator {
+    width: 100%;
+    max-width: 1080px; /* autorise plus large */
+    aspect-ratio: 16 / 10; /* plus haut que 16/9 ; mets 4/3 si besoin */
+    min-height: 420px; /* fallback si aspect-ratio non supporté */
+    margin: 0 auto;
+    border-radius: 14px;
+}
+
+    #ihm .img-rotator img {
+        object-fit: contain; /* on ne rogne pas les écrans IHM */
+        background: #0b0c10;
+        padding: 6px;
+        border-radius: 12px;
+    }
+
+/* VIDÉO PLUS HAUTE (figure placée sous la grille) */
+#ihm .card.media .accel-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 520px; /* ⇦ augmente ici pour plus de hauteur (ex. 560px) */
+    max-height: 72vh; /* évite de dépasser l’écran */
+    display: block;
+    margin: 20px auto 0;
+    background: #000;
+    border-radius: 14px;
+    border: 2px solid rgba(255,255,255,.15);
+    box-shadow: 0 12px 30px rgba(0,0,0,.4);
+}
+
+/* Petits écrans : tout en 1 colonne + tailles adaptées */
+@media (max-width: 900px) {
+    #ihm .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    #ihm .img-rotator {
+        aspect-ratio: 16 / 9;
+        min-height: 360px;
+    }
+
+    #ihm .card.media .accel-video {
+        min-height: 320px;
+    }
+}
+
+/* Impression : tailles lisibles + pas de coupure */
+@media print {
+    #ihm .img-rotator {
+        max-width: 100% !important;
+        min-height: 85mm !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+        #ihm .img-rotator img {
+            padding: 0 !important;
+            background: transparent !important;
+        }
+
+    #ihm .card.media .accel-video {
+        min-height: 90mm !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+}
+
